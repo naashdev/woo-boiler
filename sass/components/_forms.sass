@@ -1,0 +1,72 @@
+/* --------------------------------------------------------------------------
+ * Forms
+ * ------------------------------------------------------------------------*/
+
+.field
+    position: relative
+    margin-bottom: 5px
+
+input[type="text"], input[type="email"], input[type="tel"], textarea
+    font-size: $font-md
+    line-height: $font-line-height
+    font-family: $font-copy
+    height: 50px
+    width: 100%
+    background: $color-white
+    padding: 14px 12px
+    border: 1px solid $color-line
+    margin-bottom: 5px
+    -webkit-appearance: none
+
+textarea
+    overflow: auto
+    height: 145px
+
+label
+    font-size: $font-md
+    color: $color-brand
+    display: block
+
+// Custom select
+.select
+    position: relative
+    .customSelect, select
+        font-size: $font-md
+        line-height: $font-line-height
+        font-family: $font-copy
+        width: 100% !important
+        height: 50px !important
+        background: $color-white
+        text-align: left
+        padding: 14px 12px
+        border: 1px solid $color-line
+        z-index: 1
+    .customSelect
+        &:after
+            content: ">"
+            font-size: 18px
+            position: absolute
+            right: 10px
+
+.customSelectInner
+    width: 100%!important
+
+// Placeholder
++placeholder($color-font, 1)
+
+// Gravity Forms
+// ---------------------------------------------
+
+form ul
+    +reset-list
+
+.gfield
+    margin-bottom: 5px
+
+.gfield_description
+    &.validation_message
+        font-weight: bold
+        font-size: $font-sm
+        color: $color-error
+        display: block
+        margin: 0 0 10px

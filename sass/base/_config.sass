@@ -1,0 +1,63 @@
+/* --------------------------------------------------------------------------
+ * Color
+ * ------------------------------------------------------------------------*/
+
+// Base
+// ---------------------------------------------
+$color-white: #FFFFFF
+$color-black: #000000
+$color-light: #FEFEFE
+$color-line: #EBEBEB
+
+// Brand
+// ---------------------------------------------
+$color-brand: #9ce038
+$color-accent: #F76869
+
+// Font
+// ---------------------------------------------
+$color-font: #373737
+$color-font-light: #979797
+
+// Other
+// ---------------------------------------------
+$color-error: #ff002b
+
+/* --------------------------------------------------------------------------
+ * Font
+ * ------------------------------------------------------------------------*/
+
+$font-copy: 'Lato', Helvetica, Arial, sans-serif
+$font-accent: Georgia, serif
+$font-line-height: 1.5
+
+// Size
+// ---------------------------------------------
+$font-sm: 11px
+$font-md: 14px
+$font-lg: 18px
+
+/* --------------------------------------------------------------------------
+ * Media
+ * ------------------------------------------------------------------------*/
+
+// Settings
+// ---------------------------------------------
+$media: (desktop-large: 1280px, desktop: 1080px, tablet-large: 960px, tablet: 769px, mobile: 480px)
+
+// Variables
+// ---------------------------------------------
+$desktop-large: "screen and (min-width: #{map-get($media, desktop-large)})"
+$desktop: "screen and (min-width: #{map-get($media, desktop)})"
+$tablet-desktop: "screen and (min-width: #{map-get($media, tablet)})"
+$tablet-large: "screen and (max-width: #{map-get($media, tablet-large)})"
+$tablet: "screen and (max-width: #{map-get($media, desktop) - 1}) and (min-width: #{map-get($media, tablet)})"
+$mobile-large: "screen and (max-width: #{map-get($media, tablet) - 1})"
+$mobile: "screen and (max-width: #{map-get($media, mobile)})"
+
+/* --------------------------------------------------------------------------
+ * Animation
+ * ------------------------------------------------------------------------*/
+
+$transition: ease-in-out
+$fluid-transition: cubic-bezier(0.165, 0.84, 0.44, 1)

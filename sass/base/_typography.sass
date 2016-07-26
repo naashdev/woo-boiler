@@ -1,0 +1,51 @@
+/* --------------------------------------------------------------------------
+ * Headings
+ * ------------------------------------------------------------------------*/
+
+h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6
+    font-weight: normal
+    line-height: 1.2
+    margin: 0.25em 0
+
+h1,.h1
+    font-size: 30px
+    @media #{$tablet}
+        font-size: 40px
+    @media #{$desktop}
+        font-size: 50px
+h2,.h2
+    font-size: 24px
+    @media #{$tablet}
+        font-size: 30px
+    @media #{$desktop}
+        font-size: 40px
+h3,.h3
+    font-size: 22px
+    @media #{$tablet}
+        font-size: 26px
+    @media #{$desktop}
+        font-size: 30px
+h4,.h4
+    font-size: $font-lg
+
+h5,.h5
+    font-size: $font-md
+
+h6,.h6
+    font-size: $font-sm
+
+/* --------------------------------------------------------------------------
+ * Body Copy
+ * ------------------------------------------------------------------------*/
+
+p
+    margin: 0 0 20px
+
+ul, ol
+    margin: 0 0 20px
+
+a
+    color: $color-brand
+    text-decoration: none
+    +fluid-transition
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0)

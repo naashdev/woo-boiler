@@ -1,0 +1,121 @@
+/* --------------------------------------------------------------------------
+ * Shop
+ * ------------------------------------------------------------------------*/
+
+// Woocoomerce
+// ---------------------------------------------
+
+.woocommerce
+    // Messages
+    .woocommerce-message
+        border-top-color: $color-brand
+        background-color: darken($color-light, 1)
+        color: $color-font
+        &:before
+            color: $color-brand
+    .woocommerce-error
+        border-top-color: $color-error
+        &:before
+            color: $color-error
+    // Forms
+    form
+        .form-row.woocommerce-invalid
+            label
+                color: $color-brand
+            input.input-text, select, .select2-container
+                border-color: $color-error
+        .form-row.woocommerce-validated
+            input.input-text, select, .select2-container
+                border-color: $color-line
+    // Shop tables
+    table.shop_table
+        border: 0px
+        border-radius: 0px
+        td
+            border-color: $color-line
+            &.product-quantity
+                text-align: left !important
+                &:before
+                    margin: 0 0 5px
+                    display: block
+                    float: none
+    table.shop_table_responsive
+        @media #{$mobile-large}
+            tr:nth-child(2n) td
+                background-color: $color-light
+    // Cart
+    a.discard
+        display: block
+        font-size: 30px
+        font-weight: bold
+        color: $color-error
+        height: 1em
+        width: 1em
+        text-align: center
+        line-height: 1
+    .cart-collaterals
+        .cart_totals table
+            td, th
+                vertical-align: top
+            @media #{$tablet-desktop}
+                th
+                    width: 40%
+        .shipping-calculator-button
+            display: block
+            font-weight: bold
+            text-decoration: underline
+            margin: 10px 0 0
+// Product Archive
+// ---------------------------------------------
+
+.product-tile
+    display: block
+
+.product
+    margin-bottom: 20px
+
+// Cart
+// ---------------------------------------------
+.quantity
+    width: 86px
+    position: relative
+    > input[type="text"]
+        height: 44px
+        width: 100% !important
+        text-align: center
+        padding-right: 50px
+    > .plus, > .minus
+        font-size: 1em
+        line-height: 1
+        background: $color-brand
+        border: none
+        color: $color-white
+        font-weight: bold
+        text-align: center
+        height: 18px
+        width: 36px
+        position: absolute
+        right: 3px
+        top: 3px
+        cursor: pointer
+    > .minus
+        top: 23px
+
+// Product gallery
+// ---------------------------------------------
+.product-images
+    width: 100%
+    overflow: hidden
+    ul
+        +reset-list
+        > li
+            float: left
+    >*:first-child
+        margin-bottom: 10px !important
+    a
+        display: block
+
+.product-slider img, .thumbnails img
+    width: 100%
+    height: auto
+    display: block

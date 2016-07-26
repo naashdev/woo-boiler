@@ -1,0 +1,214 @@
+/* --------------------------------------------------------------------------
+ * Header
+ * ------------------------------------------------------------------------*/
+
+.header
+    position: relative
+    // Mobile Layout
+    // ---------------------------------------------
+    @media #{$mobile-large}
+        background: $color-brand
+        .grid
+            padding: 0
+        .menu-ctrl
+            position: absolute
+            top: 35px
+            margin-top: -11px
+            right: 20px
+        .main-navigation
+            display: none
+    // Tablet & Desktop Layout
+    // ---------------------------------------------
+    @media #{$tablet-desktop}
+        background: $color-white
+        padding-top: 20px
+        .menu-ctrl
+            display: none
+        .main-navigation
+            display: block !important
+            .arrow
+                display: none
+    // Logo
+    // ---------------------------------------------
+    .logo
+        +display-bg(80px, 50px, '../images/logo.svg')
+        margin: 10px 0
+        display: none
+        @media #{$tablet}
+            width: 140px
+            height: 90px
+        @media #{$desktop}
+            width: 140px
+            height: 90px
+    // Main Nav
+    // ---------------------------------------------
+    .main-navigation
+        ul
+            +reset-list
+            +clearfix
+        // Top level
+        > ul
+            li
+                position: relative
+                width: 100%
+            // Top level
+            > li
+                // All Links
+                a
+                    display: block
+                    position: relative
+                    padding: 10px 20px
+                    background: $color-light
+                    border-bottom: 1px solid $color-line
+                    z-index: 1
+                // Top level links
+                > a
+        @media #{$mobile-large}
+            > ul
+                .submenu
+                    display: none
+        @media #{$tablet-desktop}
+            float: left
+            margin: 0 0 20px
+            > ul
+                // Top level
+                > li
+                    width: auto
+                    &:hover, &:focus
+                        > a
+                            background: $color-brand
+                            color: $color-white
+                        .submenu
+                            opacity: 1
+                            left: 50%
+                            padding-top: 0
+                            transition: 0s left 0s, .3s padding-top 0s, .3s opacity $transition 0s
+                    > a
+                        border: 0
+                // Second level
+                .submenu
+                    position: absolute
+                    top: 100%
+                    left: -999em
+                    margin-left: -120px
+                    width: 240px
+                    padding-top: 5px
+                    background: $color-white
+                    opacity: 0
+                    display: block !important
+                    transition: 0s left .3s, .3s padding-top 0s, .3s opacity $transition 0s
+                    > li
+                        // Sub links
+                        > a
+                            &:hover
+                                background: darken($color-light, 2)
+    // Other
+    // ---------------------------------------------
+    // Other elements go here...
+
+
+
+// Menu & Submenu Toggle
+// ---------------------------------------------
+.menu-ctrl
+  width: 30px
+  height: 22px
+  display: block
+  position: relative
+  @media #{$tablet-desktop}
+    display: none
+  > .line
+    width: 30px
+    height: 2px
+    background: $color-font
+    display: block
+    position: absolute
+  > .line1
+    top: 0px
+    +transition(.4s ease-in-out)
+  > .line2
+    top: 10px
+    +transition(.3s ease-in-out)
+  > .line3
+    top: 20px
+    +transition(.4s ease-in-out)
+
+.arrow
+    +display-bg(42px, 42px, $color-brand)
+    position: absolute
+    right: 0
+    top: 0
+    z-index: 2
+    cursor: pointer
+
+// Cart
+// ---------------------------------------------
+.header-cart
+    position: relative
+    float: right
+    border-radius: 50%
+    display: block
+    width: 45px
+    height: 45px
+    background: $color-brand
+    color: $color-white
+    font-weight: bold
+    text-align: center
+    > .count
+        display: block
+        position: absolute
+        line-height: 1
+        top: 50%
+        margin-top: -0.5em
+        left: 0
+        right: 0
+    .cart-notice
+        position: absolute
+        color: $color-white
+        top: 80%
+        background: $color-brand
+        padding: 20px 40px
+        width: 320px
+        right: -999em
+        opacity: 0
+        margin-top: 30px
+        transition: top .3s $fluid-transition, opacity .3s $fluid-transition, right 0s
+        transition-delay: 0s, 0s, 0.3s
+        &.is-visible
+            right: 0
+            top: 100%
+            opacity: 1
+            transition-delay: 0s, 0s, 0s
+
+
+// Mobile Menu Open
+// ---------------------------------------------
+.nav-open
+    .header
+        .menu-ctrl
+            > .line1
+                transform: rotate(45deg)
+                top: 10px
+            > .line2
+                opacity: 0
+            > .line3
+                transform: rotate(-45deg)
+                top: 10px
+
+// Nav Fixed
+// ---------------------------------------------
+.nav-fixed
+    @media #{$mobile-large}
+        padding-top: 60px
+    @media #{$tablet-desktop}
+        padding-top: 81px
+    .header
+        position: fixed
+        top: -81px
+        left: 0
+        right: 0
+        z-index: 999
+        +fluid-transition(top, .4s)
+.nav-animate
+    .header
+        top: 0px
