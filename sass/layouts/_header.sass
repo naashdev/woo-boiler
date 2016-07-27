@@ -3,11 +3,16 @@
  * ------------------------------------------------------------------------*/
 
 .header
-    position: relative
+    position: fixed
+    background: $color-white
+    top: 0
+    left: 0
+    right: 0
+    z-index: 999
     // Mobile Layout
     // ---------------------------------------------
     @media #{$mobile-large}
-        background: $color-brand
+        border-bottom: 1px solid $color-line
         .grid
             padding: 0
         .menu-ctrl
@@ -33,13 +38,15 @@
     .logo
         +display-bg(80px, 50px, '../images/logo.svg')
         margin: 10px 0
-        display: none
+        display: block
         @media #{$tablet}
             width: 140px
             height: 90px
         @media #{$desktop}
             width: 140px
             height: 90px
+        @media #{$tablet-desktop}
+            display: none
     // Main Nav
     // ---------------------------------------------
     .main-navigation
@@ -145,7 +152,6 @@
 // ---------------------------------------------
 .header-cart
     position: relative
-    float: right
     border-radius: 50%
     display: block
     width: 45px
@@ -154,6 +160,12 @@
     color: $color-white
     font-weight: bold
     text-align: center
+    @media #{$tablet-desktop}
+        float: right
+    @media #{$mobile-large}
+        position: absolute
+        right: 80px
+        top: 12px
     > .count
         display: block
         position: absolute
@@ -163,22 +175,28 @@
         left: 0
         right: 0
     .cart-notice
-        position: absolute
+        position: fixed
+        width: 100%
         color: $color-white
-        top: 80%
+        top: 71px
         background: $color-brand
         padding: 20px 40px
-        width: 320px
         right: -999em
         opacity: 0
-        margin-top: 30px
         transition: top .3s $fluid-transition, opacity .3s $fluid-transition, right 0s
         transition-delay: 0s, 0s, 0.3s
+        @media #{$tablet-desktop}
+            position: absolute
+            width: 320px
+            top: 80%
+            margin-top: 30px
         &.is-visible
             right: 0
-            top: 100%
             opacity: 1
             transition-delay: 0s, 0s, 0s
+            @media #{$tablet-desktop}
+                top: 100%
+
 
 
 // Mobile Menu Open
@@ -198,17 +216,14 @@
 // Nav Fixed
 // ---------------------------------------------
 .nav-fixed
-    @media #{$mobile-large}
-        padding-top: 60px
-    @media #{$tablet-desktop}
-        padding-top: 81px
     .header
         position: fixed
-        top: -81px
+        top: 0
         left: 0
         right: 0
         z-index: 999
         +fluid-transition(top, .4s)
+
 .nav-animate
     .header
         top: 0px

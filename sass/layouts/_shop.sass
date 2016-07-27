@@ -39,6 +39,9 @@
                     margin: 0 0 5px
                     display: block
                     float: none
+            &.product-discard
+                &:before
+                    display: none
     table.shop_table_responsive
         @media #{$mobile-large}
             tr:nth-child(2n) td
@@ -65,11 +68,14 @@
             font-weight: bold
             text-decoration: underline
             margin: 10px 0 0
+
 // Product Archive
 // ---------------------------------------------
 
 .product-tile
     display: block
+    img
+        width: 100%
 
 .product
     margin-bottom: 20px

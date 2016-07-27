@@ -8,13 +8,13 @@ var PROD_GALLERY = require('../plugins/surgeSlider.min.js');
 var CUSTOMSELECT = require('../plugins/jquery.customSelect.min.js');
 
 // Init
-var init = function(){
+var _init = function(){
 
     // Cache elements
-    setEl();
+    _setEl();
 
     // Bind events
-    bindEvents();
+    _bindEvents();
 
     // Product slider
     $el.productSlider.surgeSlider({
@@ -29,7 +29,7 @@ var init = function(){
 // Elements
 var $el = {};
 
-var setEl = function(){
+var _setEl = function(){
 
     $el = {
         addToCart: $('.js-add-to-cart'),
@@ -50,26 +50,36 @@ var data = {},
     noticeTimer,
     ajaxing;
 
-var bindEvents = function(){
+var _bindEvents = function(){
 
     //Single add to cart
-    $el.addToCart.on('click', updateCart);
+    $el.addToCart.on('click', _updateCart);
 
     //Form add to cart
-    $el.formAddToCart.on('submit', updateCart);
+    $el.formAddToCart.on('submit', _updateCart);
+
+    // Bind cart table events
+    _bindCart();
+
+    // Rebind events on .woocommerce div udate
+    $(document.body).on( 'updated_wc_div', _bindCart);
+
+};
+
+var _bindCart = function(){
 
     //Quantity counter
-    $el.quantityPlus.on('click', updateQuantity).dblclick(function(e){
+    $('.js-quantity > .plus').on('click', _updateQuantity).dblclick(function(e){
         e.preventDefault();
     });
-    $el.quantityMinus.on('click', updateQuantity).dblclick(function(e){
+    $('.js-quantity > .minus').on('click', _updateQuantity).dblclick(function(e){
         e.preventDefault();
     });
 
 };
 
 // Ajaxify cart
-var updateCart = function(e){
+var _updateCart = function(e){
 
     if (typeof e !== 'undefined') e.preventDefault();
 
@@ -81,6 +91,9 @@ var updateCart = function(e){
     var $btn = _this;
 
     data = {}; // clear data variable
+
+    // Ensure cart notice isn't open
+    $el.cartNotice.removeClass('is-visible');
 
     // If is form or single button
     if (_this.is('form')) {
@@ -106,12 +119,12 @@ var updateCart = function(e){
     });
 
     $.post(window.location.href, data, function(response){
-        updateHeaderCart($btn);
+        _updateHeaderCart($btn);
     });
 
 };
 
-var updateCartNotice = function(response){
+var _updateCartNotice = function(response){
 
     clearTimeout(noticeTimer);
 
@@ -125,15 +138,15 @@ var updateCartNotice = function(response){
 
 };
 
-var updateHeaderCart = function($link){
+var _updateHeaderCart = function($link){
 
     $.post(woocommerce_params.ajax_url, {'action': 'shop_get_cart_count'}, function(response){
-        if ( $el.cartCount.text(response.cart_count) ) updateCartNotice(data), $link.removeClass('is-loading').prop('disabled', false), ajaxing = false;
+        if ( $el.cartCount.text(response.cart_count) ) _updateCartNotice(data), $link.removeClass('is-loading').prop('disabled', false), ajaxing = false;
     });
 
 };
 
-var updateQuantity = function(e){
+var _updateQuantity = function(e){
 
     if (typeof e !== 'undefined') e.preventDefault();
 
@@ -148,17 +161,17 @@ var updateQuantity = function(e){
 }
 
 // On Resize
-var resize = function(){
+var _resize = function(){
     // Resize events go here...
 };
 
 // On Scroll
-var scroll = function(){
+var _scroll = function(){
     // Scroll events go here...
 };
 
 module.exports = {
-    init: init,
-    resize: resize,
-    scroll: scroll,
+    init: _init,
+    resize: _resize,
+    scroll: _scroll,
 };

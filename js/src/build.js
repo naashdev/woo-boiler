@@ -42,6 +42,7 @@ var _config = {
 
     onScroll: function(){
         // Scroll events go here...
+        NAV.scroll();
     },
 
 }

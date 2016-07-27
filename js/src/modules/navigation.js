@@ -18,10 +18,12 @@ var $el = {};
 var _setEl = function(){
 
     $el = {
+        header: $('.header'),
         nav: $('.header .js-main-nav'),
         navLi: $('.header .main-navigation > ul > li'),
         subnavs: $('.header .main-navigation .submenu'),
-        openNav: $('.header .js-menu-ctrl, .header .main-navigation .js-submenu-ctrl')
+        openNav: $('.header .js-menu-ctrl, .header .main-navigation .js-submenu-ctrl'),
+        cartNotice: $('.header .js-cart .cart-notice')
     };
 
 }
@@ -39,6 +41,8 @@ var _toggle = function(e){
     if (typeof e !== 'undefined') e.preventDefault();
 
     if ($(this).hasClass('js-menu-ctrl')) {
+
+        $el.cartNotice.removeClass('is-visible');
 
         if ($BODY.hasClass('nav-open')) {
             // Close subnavs
@@ -68,6 +72,18 @@ var _toggle = function(e){
 
 };
 
+var _checkFixed = function(){
+    var scroll = $WINDOW.scrollTop();
+    if (scroll > $el.header.height() ) {
+        $BODY.addClass('nav-fixed');
+        setTimeout(function(){
+            $BODY.addClass('nav-animate')
+        }, 200);
+    } else {
+        $BODY.removeClass('nav-animate').removeClass('nav-fixed');
+    }
+};
+
 // On Resize
 var _resize = function(){
     // Resize events go here...
@@ -77,6 +93,7 @@ var _resize = function(){
 // On Scroll
 var _scroll = function(){
     // Scroll events go here...
+    _checkFixed();
 };
 
 

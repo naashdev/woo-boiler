@@ -28,16 +28,6 @@ function wp_scripts_and_styles() {
   }
 }
 
-function wp_woocommerce_template_loop_product_link_open() {
-    echo '<a href="' . get_the_permalink() . '" class="product-tile">';
-}
-
-remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open');
-add_action('woocommerce_before_shop_loop_item', 'wp_woocommerce_template_loop_product_link_open');
-
-remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
-
-remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' , 10 );
 
 //----------------------------------------------------------------------------------
 // Theme Setup
@@ -45,13 +35,16 @@ remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' 
 
 function wp_start_theme() {
 
-  // Add Styles & Scripts
-  add_action( 'wp_enqueue_scripts', 'wp_scripts_and_styles', 999 );
+    // Required
+    //require('includes/wp-custom.php');
+    require('includes/wc-custom.php');
 
-
+    // Add Styles & Scripts
+    add_action( 'wp_enqueue_scripts', 'wp_scripts_and_styles', 999 );
 
 }
 
 add_action('after_setup_theme', 'wp_start_theme');
 
+// Shop API extension
 require('includes/shop-api.php');

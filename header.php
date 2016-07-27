@@ -20,7 +20,7 @@
         </a>
         <nav class="main-navigation js-main-nav" role="navigation">
           <ul class="nav">
-            <li><a href="<?php echo site_url() . '/shop'; ?>">Shop</a></li>
+            <li><a href="<?php echo site_url(); ?>">Shop</a></li>
             <li><a href="<?php echo site_url() . '/product-category/posters'; ?>">Posters</a></li>
             <li><a href="<?php echo site_url() . '/product-category/clothing'; ?>">Clothing</a></li>
           </ul>
