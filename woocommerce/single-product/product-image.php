@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $post, $product, $woocommerce;
 ?>
 <div class="col c-2-5">
-	<div class="product-images">
+	<div class="product-images js-product-slider">
 		<?php
 
 			$attachment_ids = $product->get_gallery_attachment_ids();

@@ -18,10 +18,11 @@ var _init = function(){
 
     // Product slider
     $el.productSlider.surgeSlider({
-        thumb: '.thumbnails',
+        thumb: '.js-product-slider .thumbnails',
         thumb_show: 3,
         thumb_gutter: 10,
-        pager: '.pager',
+        active_class: 'is-active',
+        pager: '.js-product-slider .pager',
     });
 
 };
@@ -39,7 +40,8 @@ var _setEl = function(){
         quantityPlus: $('.js-quantity > .plus'),
         quantityMinus: $('.js-quantity > .minus'),
         shippingState: $('#calc_shipping_state_field'),
-        productSlider: $('.js-product-slider'),
+        productSlider: $('.js-product-slider .images'),
+        productSliderToggle: $('.js-product-slider .slider-controls > .next, .js-product-slider .slider-controls > .prev')
     };
 
 }
@@ -57,6 +59,9 @@ var _bindEvents = function(){
 
     //Form add to cart
     $el.formAddToCart.on('submit', _updateCart);
+
+    // Next & Prev buttons for slider
+    $el.productSliderToggle.on('click', _toggleSlider);
 
     // Bind cart table events
     _bindCart();
@@ -157,6 +162,17 @@ var _updateQuantity = function(e){
     var num = quantity + add;
 
     (num >= 1) ? input.val(num).attr('value', num) : input.val(1).attr('value', 1);
+
+}
+
+// Toggle slider
+var _toggleSlider = function(e){
+
+    if (typeof e !== 'undefined') e.preventDefault();
+
+    var trigger = ($(this).hasClass('next')) ? 'surge-slider-next' : 'surge-slider-prev';
+
+    $el.productSlider.trigger(trigger);
 
 }
 

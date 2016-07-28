@@ -69,6 +69,11 @@
             text-decoration: underline
             margin: 10px 0 0
 
+    .product-thumbnail
+        margin-right: 20px
+        @media #{$mobile-large}
+            display: none
+
 // Product Archive
 // ---------------------------------------------
 
@@ -111,17 +116,31 @@
 // ---------------------------------------------
 .product-images
     width: 100%
-    overflow: hidden
-    ul
+    .surge-wrapper
+        overflow: hidden
+    .slider
         +reset-list
+        overflow: hidden
         > li
-            float: left
-    >*:first-child
+            a
+                display: block
+                border: 1px solid $color-line
+                border-radius: 10px
+                overflow: hidden
+        img
+            width: 100%
+            height: auto
+            display: block
+    .top
         margin-bottom: 10px !important
-    a
-        display: block
-
-.product-slider img, .thumbnails img
-    width: 100%
-    height: auto
-    display: block
+        border: 1px solid $color-line
+        border-radius: 10px
+        overflow: hidden
+    .bottom
+        position: relative
+        @media #{$mobile-large}
+            > *:first-child
+                display: none
+        @media #{$tablet-desktop}
+            .pager
+                display: none

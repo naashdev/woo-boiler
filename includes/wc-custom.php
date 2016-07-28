@@ -1,7 +1,9 @@
 <?php
+//----------------------------------------------------------------------------------
+// Edit/Remove Woocommerce actions
+//----------------------------------------------------------------------------------
 
-
-//
+// Change product tile link
 function woo_template_loop_product_link_open() {
     echo '<a href="' . get_the_permalink() . '" class="product-tile">';
 }
@@ -18,7 +20,35 @@ remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_p
 // Remove cart collaterals
 remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' , 10 );
 
-// Utitlity Functions
+// WooCommerce Checkout Fields Hook
+add_filter( 'woocommerce_checkout_fields' , 'custom_wc_checkout_fields' );
+
+// Change order comments placeholder and label, and set billing phone number to not required.
+function custom_wc_checkout_fields( $fields ) {
+
+    foreach ($fields['billing'] as $key => $field) {
+
+        if ($key !== 'billing_address_1' && $key !== 'billing_address_2') {
+            $fields['billing'][$key]['placeholder'] = $field['label'];
+        }
+        $fields['billing'][$key]['label'] = false;
+    }
+
+    foreach ($fields['order'] as $key => $field) {
+
+        $fields['order'][$key]['placeholder'] = $field['label'];
+        $fields['order'][$key]['label'] = false;
+    }
+
+    return $fields;
+}
+
+
+//----------------------------------------------------------------------------------
+// Custom functions
+//----------------------------------------------------------------------------------
+
+// Product single slider
 function woo_product_image_slider($ids) {
 
     global $post, $product, $woocommerce;
@@ -31,8 +61,8 @@ function woo_product_image_slider($ids) {
             array_unshift( $ids, $feature_id );
         }
 
-        woo_print_product_image_html($ids, 'large', 'slider js-product-slider');
-        woo_print_product_image_html($ids, 'thumbnail', 'thumbnails');
+        woo_print_product_image_html($ids, 'large', 'images slider');
+        woo_print_product_image_html($ids, 'thumbnail', 'thumbnails slider');
 
     }
 
@@ -40,13 +70,15 @@ function woo_product_image_slider($ids) {
 
 function woo_print_product_image_html($ids, $size, $classes) {
 
-    echo '<ul class="' . $classes . '">';
-
     if ($size == 'large') {
         $filter = apply_filters('single_product_large_thumbnail_size', 'shop_single');
+        $part = 'top';
     } else {
         $filter = apply_filters( 'single_product_small_thumbnail_size', 'shop_thumbnail' );
+        $part = 'bottom';
     }
+
+    echo '<div class="' . $part . '"><ul class="' . $classes . '">';
 
     // Print images
     foreach ( $ids as $attachment_id ) {
@@ -74,4 +106,45 @@ function woo_print_product_image_html($ids, $size, $classes) {
     }
 
     echo '</ul>';
+
+    if ($part == 'bottom') {
+        echo '<nav class="slider-controls">';
+        echo '<a class="prev" href="#"><</a>';
+        echo '<a class="next" href="#">></a>';
+        echo '<div class="pager"></div>';
+        echo '</nav>';
+    }
+
+    echo '</div>';
+}
+
+// Get all categories
+function woo_get_product_categories($classes) {
+
+        $tax = 'product_cat';
+        $args = array( 'parent' => 0 );
+
+        // Get top level cats only
+    	$top_cats = get_terms( $tax, $args);
+
+        if ($top_cats) {
+            echo '<ul class="' . $classes . '">';
+            foreach ( $top_cats as $cat ) {
+                echo '<li><a href="' . get_term_link($cat->term_id) . '">' . $cat->name . '</a>';
+
+                // Check for child cat
+                $sub_cats = get_terms( 'product_cat', array( 'parent' => $cat->term_id ));
+                if ($sub_cats) {
+                    echo '<ul>';
+                    foreach ($sub_cats as $sub) {
+                        echo '<li><a href="' . get_term_link($sub->term_id) . '">' . $sub->name . '</a></li>';
+                    }
+                    echo '</ul>';
+                }
+
+                echo '</li>';
+            }
+            echo '</ul>';
+        }
+
 }

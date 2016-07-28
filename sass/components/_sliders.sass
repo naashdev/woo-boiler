@@ -1,0 +1,26 @@
+.slider-controls
+    @media #{$mobile-large}
+        .next, .prev
+            display: none
+    @media #{$tablet-desktop}
+        .next, .prev
+            position: absolute
+            font-size: 18px
+            top: 50%
+            margin-top: -0.5em
+        .prev
+            left: -20px
+        .next
+            right: -20px
+
+.pager
+    a
+        display: inline-block
+        width: 9px
+        height: 9px
+        border-radius: 50%
+        border: 1px solid $color-brand
+        background: $color-brand
+        margin: 0 4px 0
+        &.is-active
+            background: $color-white
